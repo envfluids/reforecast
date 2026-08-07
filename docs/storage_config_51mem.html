@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Additional Dataset Information — UChicago AI Weather Model Reforecast Archive</title>
+  <meta name="description" content="Per-model variable save sets for the
+    UChicago AI weather model reforecast archive.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <h1>UChicago AI Weather Model Reforecast Archive</h1>
+    <span class="sub">Data documentation</span>
+  </div>
+</header>
+
+<nav class="pages" aria-label="Pages">
+  <div class="wrap">
+    <a href="index.html">Overview</a>
+    <a href="storage_config_51mem.html" class="here">Additional Dataset Information</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <nav class="jump" aria-label="Jump to section">
+      <a href="#common">Common variables</a>
+      <a href="#graphcast">GraphCast</a>
+      <a href="#aurora">Aurora 1.5</a>
+      <a href="#aifs-single">AIFS-single v2</a>
+      <a href="#aifs-ens">AIFS-ENS v2</a>
+      <a href="#fgn">FGN</a>
+      <a href="#aurora-ens">Aurora 1.5 ENS</a>
+      <a href="#neuralgcm">NeuralGCM</a>
+      <a href="#selection">Variable selection</a>
+      <a href="#structure">Archive structure</a>
+    </nav>
+
+    <h2 id="common">Common variables</h2>
+    <p>These 18 variables are saved by every 0.25° model — GraphCast, Aurora 1.5,
+      AIFS-single v2, AIFS-ENS v2, FGN, and Aurora 1.5 ENS — with the same units
+      and temporal aggregation. The model sections below list only the variables
+      each model adds on top of this set. NeuralGCM runs on a different grid with
+      its own variable naming and is listed in full in its own section.</p>
+    <div class="table-wrap">
+      <table class="vars">
+        <thead>
+          <tr><th>Variable</th><th>Units</th><th>Temporal aggregation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2 m temperature (<code>2t</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Mean sea level pressure (<code>mslp</code>)</td><td>Pa</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Specific humidity at 1000 hPa (<code>q_1000</code>)</td><td>kg kg⁻¹</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Specific humidity at 925 hPa (<code>q_925</code>)</td><td>kg kg⁻¹</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Specific humidity at 850 hPa (<code>q_850</code>)</td><td>kg kg⁻¹</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Temperature at 1000 hPa (<code>t_1000</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Temperature at 925 hPa (<code>t_925</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Temperature at 850 hPa (<code>t_850</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Total precipitation (<code>tp</code>)</td><td>m</td><td>Daily accumulation (UTC day)</td></tr>
+          <tr><td>U wind component at 50 hPa (<code>u_50</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>U wind component at 200 hPa (<code>u_200</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>U wind component at 850 hPa (<code>u_850</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>V wind component at 50 hPa (<code>v_50</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>V wind component at 200 hPa (<code>v_200</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>V wind component at 850 hPa (<code>v_850</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>Geopotential at 200 hPa (<code>z_200</code>)</td><td>m² s⁻²</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>Geopotential at 500 hPa (<code>z_500</code>)</td><td>m² s⁻²</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>Geopotential at 850 hPa (<code>z_850</code>)</td><td>m² s⁻²</td><td>Daily mean (UTC day)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">Mean sea level pressure is named <code>msl</code> in
+      AIFS-ENS v2 and <code>mslp</code> in the other models.</p>
+
+    <h2 id="graphcast">GraphCast</h2>
+    <p class="pills">
+      <span class="pill">Class: deterministic</span>
+      <span class="pill">Grid: 721 × 1440 (0.25°)</span>
+      <span class="pill">Forecast length: 50 days</span>
+    </p>
+    <p>GraphCast saves the common variables only.</p>
+
+    <h2 id="aurora">Aurora 1.5</h2>
+    <p class="pills">
+      <span class="pill">Class: deterministic</span>
+      <span class="pill">Grid: 720 × 1440 (0.25°)</span>
+      <span class="pill">Forecast length: 50 days</span>
+    </p>
+    <div class="table-wrap">
+      <table class="vars">
+        <thead>
+          <tr><th>Variable</th><th>Units</th><th>Temporal aggregation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2 m dewpoint temperature (<code>2d</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Surface pressure (<code>sp</code>)</td><td>Pa</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Soil temperature level 1 (<code>stl1</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Volumetric soil water layer 1 (<code>swvl1</code>)</td><td>m³ m⁻³</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Daily maximum 2 m temperature (<code>2t_max</code>)</td><td>K</td><td>Daily maximum (UTC day)</td></tr>
+          <tr><td>Daily minimum 2 m temperature (<code>2t_min</code>)</td><td>K</td><td>Daily minimum (UTC day)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="aifs-single">AIFS-single v2</h2>
+    <p class="pills">
+      <span class="pill">Class: deterministic</span>
+      <span class="pill">Grid: 721 × 1440 (0.25°)</span>
+      <span class="pill">Forecast length: 50 days</span>
+    </p>
+    <div class="table-wrap">
+      <table class="vars">
+        <thead>
+          <tr><th>Variable</th><th>Units</th><th>Temporal aggregation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2 m dewpoint temperature (<code>2d</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Surface pressure (<code>sp</code>)</td><td>Pa</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Soil temperature level 1 (<code>stl1</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Soil temperature level 2 (<code>stl2</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Volumetric soil water layer 1 (<code>swvl1</code>)</td><td>m³ m⁻³</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Volumetric soil water layer 2 (<code>swvl2</code>)</td><td>m³ m⁻³</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Total column water (<code>tcw</code>)</td><td>kg m⁻²</td><td>Daily mean (UTC day)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="aifs-ens">AIFS-ENS v2</h2>
+    <p class="pills">
+      <span class="pill">Class: ensemble</span>
+      <span class="pill">Grid: 721 × 1440 (0.25°)</span>
+      <span class="pill">Ensemble members: 51</span>
+      <span class="pill">Forecast length: 50 days</span>
+    </p>
+    <div class="table-wrap">
+      <table class="vars">
+        <thead>
+          <tr><th>Variable</th><th>Units</th><th>Temporal aggregation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2 m dewpoint temperature (<code>2d</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Surface pressure (<code>sp</code>)</td><td>Pa</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Soil temperature level 1 (<code>stl1</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Soil temperature level 2 (<code>stl2</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Volumetric soil water layer 1 (<code>swvl1</code>)</td><td>m³ m⁻³</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Volumetric soil water layer 2 (<code>swvl2</code>)</td><td>m³ m⁻³</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Total column water (<code>tcw</code>)</td><td>kg m⁻²</td><td>Daily mean (UTC day)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="fgn">FGN</h2>
+    <p class="pills">
+      <span class="pill">Class: ensemble</span>
+      <span class="pill">Grid: 721 × 1440 (0.25°)</span>
+      <span class="pill">Ensemble members: 51</span>
+      <span class="pill">Forecast length: 50 days</span>
+    </p>
+    <div class="table-wrap">
+      <table class="vars">
+        <thead>
+          <tr><th>Variable</th><th>Units</th><th>Temporal aggregation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Sea surface temperature (<code>sst</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="aurora-ens">Aurora 1.5 ENS</h2>
+    <p class="pills">
+      <span class="pill">Class: ensemble</span>
+      <span class="pill">Grid: 720 × 1440 (0.25°)</span>
+      <span class="pill">Ensemble members: 51</span>
+      <span class="pill">Forecast length: 50 days</span>
+    </p>
+    <div class="table-wrap">
+      <table class="vars">
+        <thead>
+          <tr><th>Variable</th><th>Units</th><th>Temporal aggregation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2 m dewpoint temperature (<code>2d</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Surface pressure (<code>sp</code>)</td><td>Pa</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Soil temperature level 1 (<code>stl1</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Volumetric soil water layer 1 (<code>swvl1</code>)</td><td>m³ m⁻³</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Daily maximum 2 m temperature (<code>2t_max</code>)</td><td>K</td><td>Daily maximum (UTC day)</td></tr>
+          <tr><td>Daily minimum 2 m temperature (<code>2t_min</code>)</td><td>K</td><td>Daily minimum (UTC day)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="neuralgcm">NeuralGCM</h2>
+    <div class="note">NeuralGCM is stored on a coarse grid with its own variable
+      naming. The full save set is listed below.</div>
+    <p class="pills">
+      <span class="pill">Class: ensemble</span>
+      <span class="pill">Grid: 64 × 128 (≈2.8°)</span>
+      <span class="pill">Ensemble members: 51</span>
+      <span class="pill">Forecast length: 50 days</span>
+    </p>
+    <div class="table-wrap">
+      <table class="vars">
+        <thead>
+          <tr><th>Variable</th><th>Units</th><th>Temporal aggregation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Temperature at 1000 hPa (<code>temperature_1000</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Temperature at 925 hPa (<code>temperature_925</code>)</td><td>K</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Specific humidity at 1000 hPa (<code>specific_humidity_1000</code>)</td><td>kg kg⁻¹</td><td>6-hourly instantaneous</td></tr>
+          <tr><td>Geopotential at 200 hPa (<code>geopotential_200_avg</code>)</td><td>m² s⁻²</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>Geopotential at 500 hPa (<code>geopotential_500_avg</code>)</td><td>m² s⁻²</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>Geopotential at 850 hPa (<code>geopotential_850_avg</code>)</td><td>m² s⁻²</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>Specific humidity at 925 hPa (<code>specific_humidity_925_avg</code>)</td><td>kg kg⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>Specific humidity at 850 hPa (<code>specific_humidity_850_avg</code>)</td><td>kg kg⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>Temperature at 200 hPa (<code>temperature_200_avg</code>)</td><td>K</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>Temperature at 500 hPa (<code>temperature_500_avg</code>)</td><td>K</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>Temperature at 850 hPa (<code>temperature_850_avg</code>)</td><td>K</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>U wind component at 50 hPa (<code>u_component_of_wind_50_avg</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>U wind component at 200 hPa (<code>u_component_of_wind_200_avg</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>U wind component at 500 hPa (<code>u_component_of_wind_500_avg</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>U wind component at 850 hPa (<code>u_component_of_wind_850_avg</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>V wind component at 50 hPa (<code>v_component_of_wind_50_avg</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>V wind component at 200 hPa (<code>v_component_of_wind_200_avg</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>V wind component at 500 hPa (<code>v_component_of_wind_500_avg</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>V wind component at 850 hPa (<code>v_component_of_wind_850_avg</code>)</td><td>m s⁻¹</td><td>Daily mean (UTC day)</td></tr>
+          <tr><td>Total precipitation, 24 h accumulation (<code>total_precipitation_24hr</code>)</td><td>m</td><td>24 h accumulation (UTC day)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="selection">Variable selection</h2>
+    <p>Variables were selected for
+      their utility in human-centered benchmarking of high-impact phenomena
+      (heat waves, cold air outbreaks, heavy precipitation), for general
+      geoscience research use, and for driver analysis of the large-scale
+      atmospheric patterns that condition those phenomena — blocking and Rossby
+      wave activity (<code>z_500</code>, <code>z_200</code>), jet position and
+      storm tracks (<code>u_200</code>, <code>v_200</code>, <code>u_850</code>,
+      <code>v_850</code>), stratospheric variability and its surface coupling
+      (<code>u_50</code>, <code>v_50</code>), and lower-tropospheric moisture and
+      thermal structure (<code>q_1000</code>–<code>q_850</code>,
+      <code>t_1000</code>–<code>t_850</code>).</p>
+    <p>Temporal aggregation follows the same logic: fields used for extremes and
+      threshold exceedance are kept 6-hourly, while circulation diagnostics are
+      stored as daily means.</p>
+
+    <h2 id="structure">Archive structure &amp; format</h2>
+
+    <div class="cards">
+      <div class="card">
+        <div class="kpi">3.10 PiB</div>
+        <div class="lbl">Daily Initializations — full 2000–2025 archive</div>
+      </div>
+    </div>
+
+    <p>Forecasts are stored as one zarr store per model per initialization:
+      <code>forecasts_&lt;model&gt;/init_YYYYMMDDT00.zarr</code>. Dimensions are
+      <code>(time, [number,] prediction_timedelta, lat, lon)</code> for 6-hourly
+      fields and <code>prediction_timedelta_daily</code> for daily aggregates;
+      <code>number</code> is the ensemble-member dimension. All data are
+      float32.</p>
+    <p>Daily aggregates are given by: means of the four 6-hourly values in the
+      UTC calendar day; precipitation is the daily accumulation; 2 m temperature
+      max/min are daily extremes.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Details may evolve as the archive continues to grow.</p>
+    <p>University of Chicago ·
+      contact <a href="mailto:marchakitus@uchicago.edu">marchakitus@uchicago.edu</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

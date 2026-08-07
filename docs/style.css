@@ -1,0 +1,313 @@
+/* UChicago AI Weather Model Reforecast Archive — shared styles */
+
+:root {
+  --maroon: #800000;
+  --maroon-dark: #5c0000;
+  --ink: #1a1a1a;
+  --muted: #5f6368;
+  --line: #e3e3e3;
+  --bg: #fafafa;
+  --card: #ffffff;
+  --tint: #f3eded;
+  --tint-soft: #fbf8f8;
+  --wrap: 1100px;
+  --table: 820px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--bg);
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Header ---------- */
+
+header.site {
+  background: var(--maroon);
+  color: #fff;
+  padding: 28px 0 22px;
+}
+
+header.site .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 18px;
+}
+
+header.site h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 650;
+}
+
+header.site .sub {
+  color: #ecd9d9;
+  font-size: 14px;
+}
+
+/* ---------- Page navigation ---------- */
+
+nav.pages {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+nav.pages .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 0;
+}
+
+nav.pages a {
+  padding: 10px 14px;
+  font-size: 13.5px;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+}
+
+nav.pages a:hover { color: var(--maroon); }
+
+nav.pages a.here {
+  color: var(--maroon);
+  border-bottom-color: var(--maroon);
+  font-weight: 600;
+}
+
+/* ---------- In-page jump links ---------- */
+
+nav.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 20px 0 4px;
+}
+
+nav.jump a {
+  display: inline-block;
+  padding: 3px 11px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--card);
+  color: var(--muted);
+  font-size: 12.5px;
+  text-decoration: none;
+}
+
+nav.jump a:hover {
+  color: var(--maroon);
+  border-color: var(--maroon);
+}
+
+/* ---------- Typography ---------- */
+
+main { padding: 28px 0 60px; }
+
+h2 {
+  font-size: 21px;
+  margin: 40px 0 10px;
+  scroll-margin-top: 60px;
+}
+
+h2:first-child { margin-top: 8px; }
+
+h3 { font-size: 17px; margin: 28px 0 8px; }
+
+/* Sub-heading for fine print — smaller than h3, keeps the heading level. */
+h3.fine {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 24px 0 2px;
+}
+
+h3.fine + p { margin-top: 0; }
+
+p, li { max-width: 76ch; }
+
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+code {
+  background: #f1efef;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 13px;
+}
+
+a:focus-visible,
+nav.pages a:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 2px;
+}
+
+/* ---------- Cards ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+
+.card .kpi {
+  font-size: 26px;
+  font-weight: 650;
+  color: var(--maroon);
+}
+
+.card .lbl {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ---------- Tables ---------- */
+
+.table-wrap {
+  margin: 12px 0 6px;
+  max-width: var(--table);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  min-width: 460px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  overflow-wrap: break-word;
+}
+
+/* Shared column geometry so every variable table lines up section to
+   section, rather than each one auto-sizing to its own contents. */
+
+table.vars { table-layout: fixed; }
+
+table.vars th:nth-child(1), table.vars td:nth-child(1) { width: 55%; }
+table.vars th:nth-child(2), table.vars td:nth-child(2) { width: 15%; }
+table.vars th:nth-child(3), table.vars td:nth-child(3) { width: 30%; }
+
+th {
+  background: var(--tint);
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+tbody tr:nth-child(even) { background: var(--tint-soft); }
+
+tbody tr:last-child td { border-bottom: none; }
+
+td a {
+  color: var(--maroon);
+  text-decoration-color: rgba(128, 0, 0, 0.35);
+  text-underline-offset: 2px;
+}
+
+td a:hover { text-decoration-color: var(--maroon); }
+
+td.num, th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- Notes & pills ---------- */
+
+.note {
+  background: #fff8ef;
+  border: 1px solid #eeddc0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  margin: 10px 0;
+  max-width: 86ch;
+}
+
+.pill {
+  display: inline-block;
+  background: var(--tint);
+  color: var(--maroon);
+  border-radius: 99px;
+  padding: 2px 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  margin: 0 6px 6px 0;
+}
+
+.pills { margin: 10px 0 14px; }
+
+/* ---------- Footer ---------- */
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 18px 0 40px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+footer a { color: var(--muted); }
+
+footer p { margin: 0 0 4px; }
+
+footer p:last-child { margin-bottom: 0; }
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 640px) {
+  .wrap { padding: 0 16px; }
+  header.site { padding: 22px 0 18px; }
+  header.site h1 { font-size: 20px; }
+  h2 { font-size: 19px; margin-top: 32px; }
+  table { font-size: 13px; }
+  th, td { padding: 7px 10px; }
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  nav.pages, nav.jump { display: none; }
+  body { background: #fff; }
+  header.site { background: #fff; color: var(--ink); }
+  header.site .sub { color: var(--muted); }
+  .table-wrap { overflow: visible; }
+}

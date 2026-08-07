@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overview — UChicago AI Weather Model Reforecast Archive</title>
+  <meta name="description" content="A multi-model archive of subseasonal
+    reforecasts from leading AI weather models, initialized 2000–2025 and
+    rolled out to 50 days.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <h1>UChicago AI Weather Model Reforecast Archive</h1>
+    <span class="sub">Data documentation</span>
+  </div>
+</header>
+
+<nav class="pages" aria-label="Pages">
+  <div class="wrap">
+    <a href="index.html" class="here">Overview</a>
+    <a href="storage_config_51mem.html">Additional Dataset Information</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <h2 id="overview">Overview</h2>
+    <p>A multi-model archive of long-range reforecasts from AI weather
+      models, initialized 2000–2025 and rolled out to 50 days — beyond the
+      models' traditional forecast lengths — at daily cadence on a global
+      0.25° grid.<a href="#grid-note">*</a> The archive supports benchmarking
+      of AI weather models, training of downstream ML models, and multi-model
+      blending. It also powers <a href="https://ai-almanac.org">AI-Almanac</a>,
+      UChicago-LAUDE's interactive, human-centered forecast platform.
+      Real-time forecasts initialized from operational ECMWF IFS analyses are
+      planned alongside the reforecasts.</p>
+
+    <h2 id="models">Models</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Class</th>
+            <th>Grid</th>
+            <th class="num">Members</th>
+            <th class="num">Forecast length</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><a href="https://www.science.org/doi/10.1126/science.adi2336">GraphCast</a></td><td>deterministic</td><td>721 × 1440 (0.25°)</td><td class="num">—</td><td class="num">50 d</td></tr>
+          <tr><td><a href="https://www.microsoft.com/en-us/research/blog/aurora-1-5-extending-open-foundation-models-for-weather-and-earth-system-applications/">Aurora 1.5</a></td><td>deterministic</td><td>720 × 1440 (0.25°)</td><td class="num">—</td><td class="num">50 d</td></tr>
+          <tr><td><a href="https://www.ecmwf.int/en/newsletter/187/news/implementation-aifs-v2">AIFS-single v2</a></td><td>deterministic</td><td>721 × 1440 (0.25°)</td><td class="num">—</td><td class="num">50 d</td></tr>
+          <tr><td><a href="https://www.ecmwf.int/en/newsletter/187/news/implementation-aifs-v2">AIFS-ENS v2</a></td><td>ensemble</td><td>721 × 1440 (0.25°)</td><td class="num">51</td><td class="num">50 d</td></tr>
+          <tr><td><a href="https://arxiv.org/abs/2506.10772">FGN</a></td><td>ensemble</td><td>721 × 1440 (0.25°)</td><td class="num">51</td><td class="num">50 d</td></tr>
+          <tr><td><a href="https://www.microsoft.com/en-us/research/publication/aurora-1-5-fine-tuning-a-foundation-model-for-medium-range-ensemble-weather-prediction/">Aurora 1.5 ENS</a></td><td>ensemble</td><td>720 × 1440 (0.25°)</td><td class="num">51</td><td class="num">50 d</td></tr>
+          <tr><td><a href="https://www.nature.com/articles/s41586-024-07744-y">NeuralGCM</a></td><td>ensemble</td><td>64 × 128 (≈2.8°)</td><td class="num">51</td><td class="num">50 d</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="planned-updates">Planned updates</h2>
+    <p>The archive is maintained as a living resource. New AI weather models are
+      added as they are released — we expect roughly one to three additions per
+      year, tracking the current pace of model releases.</p>
+    <p>Each new model is run under the same protocol as those already in the
+      archive: the same 2000–2025 initialization dates, 50-day rollouts, and
+      variable save set. Newly added models are directly comparable to
+      the existing ones without additional reprocessing.</p>
+
+    <h2 id="structure">Archive structure &amp; format</h2>
+    <p>Forecasts are stored as one zarr store per model per initialization:
+      <code>forecasts_&lt;model&gt;/init_YYYYMMDDT00.zarr</code>. Dimensions are
+      <code>(time, [number,] prediction_timedelta, lat, lon)</code> for 6-hourly
+      fields and <code>prediction_timedelta_daily</code> for daily aggregates;
+      <code>number</code> is the ensemble-member dimension. All data are
+      float32.</p>
+    <p>Daily aggregates are given by: means of the four 6-hourly values in the
+      UTC calendar day; precipitation is the daily accumulation; 2 m temperature
+      max/min are daily extremes.</p>
+
+    <h2 id="acknowledgements">Acknowledgements</h2>
+    <p>The reforecasts were generated using computing resources provided by the
+      <a href="https://datascience.uchicago.edu">Data Science Institute (DSI)</a> cluster and the
+      <a href="https://rcc.uchicago.edu">Research Computing Center (RCC)</a> at the
+      University of Chicago.</p>
+
+    <h2 id="licensing">Licensing &amp; attribution</h2>
+    <p>Forecasts were produced with third-party models. The archive does not
+      relicense them; the terms below apply to the weights that generated each
+      store.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Model</th>
+            <th>Code</th>
+            <th>Model weights</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ECMWF</td>
+            <td>AIFS-single v2</td>
+            <td><a href="https://github.com/ecmwf/anemoi-inference">Anemoi</a>, Apache 2.0</td>
+            <td><a href="https://huggingface.co/ecmwf/aifs-single-2.0">CC BY 4.0</a></td>
+          </tr>
+          <tr>
+            <td>ECMWF</td>
+            <td>AIFS-ENS v2</td>
+            <td><a href="https://github.com/ecmwf/anemoi-inference">Anemoi</a>, Apache 2.0</td>
+            <td><a href="https://huggingface.co/ecmwf/aifs-ens-2.0">CC BY 4.0</a></td>
+          </tr>
+          <tr>
+            <td>Google DeepMind</td>
+            <td>GraphCast</td>
+            <td><a href="https://github.com/google-deepmind/weathernext">Apache 2.0</a></td>
+            <td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td>
+          </tr>
+          <tr>
+            <td>Google DeepMind</td>
+            <td>FGN (WeatherNext 2)</td>
+            <td><a href="https://github.com/google-deepmind/weathernext">Apache 2.0</a></td>
+            <td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td>
+          </tr>
+          <tr>
+            <td>Google Research</td>
+            <td>NeuralGCM</td>
+            <td><a href="https://github.com/neuralgcm/neuralgcm">Apache 2.0</a></td>
+            <td><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></td>
+          </tr>
+          <tr>
+            <td>Microsoft Research</td>
+            <td>Aurora 1.5</td>
+            <td><a href="https://github.com/microsoft/aurora">MIT</a></td>
+            <td><a href="https://huggingface.co/microsoft/aurora">MIT</a></td>
+          </tr>
+          <tr>
+            <td>Microsoft Research</td>
+            <td>Aurora 1.5 ENS</td>
+            <td><a href="https://github.com/microsoft/aurora">MIT</a></td>
+            <td><a href="https://huggingface.co/microsoft/aurora">MIT</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="fine">ECMWF data</h3>
+    <p class="muted">Copyright &copy; European Centre for Medium-Range Weather Forecasts
+      (ECMWF). Source: <a href="https://www.ecmwf.int">www.ecmwf.int</a>.
+      Licence: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY
+      4.0</a>. ECMWF does not accept any liability whatsoever for any error or
+      omission in the data, their availability, or for any loss or damage
+      arising from their use. Contains modified Copernicus Climate Change
+      Service information. Neither the European Commission nor ECMWF is
+      responsible for any use of the Copernicus information or data.</p>
+
+    <div class="note">These reforecasts are experimental machine-learning
+      output, produced for research use. They are not official products of any
+      model provider or meteorological agency.</div>
+
+    <p class="muted" id="grid-note">* NeuralGCM is the exception, on a ≈2.8°
+      grid.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>This reforecast data is currently stored on HPC clusters
+      at the University of Chicago.</p>
+    <p>Details may evolve as the archive continues to grow.</p>
+    <p>University of Chicago ·
+      contact <a href="mailto:marchakitus@uchicago.edu">marchakitus@uchicago.edu</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
